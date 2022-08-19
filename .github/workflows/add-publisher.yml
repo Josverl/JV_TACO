@@ -39,22 +39,3 @@ jobs:
           path: build/packed
 
 
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   if:  ${{ inputs.environment-url }} 
-
-  #   needs:
-  #     - build-publisher
-  #   steps:
-  #     - uses: actions/download-artifact@v2
-  #       with:
-  #         name: packed-solutions
-
-  #     - uses: microsoft/powerplatform-actions/import-solution@v0
-  #       with:
-  #         solution-file: taco_publisher.zip
-  #         environment-url:  "${{ inputs.environment-url }}"
-  #         tenant-id: "${{ secrets.APP_TENANT_ID }}"
-  #         app-id: "${{ secrets.APP_ID }}"
-  #         client-secret: "${{ secrets.APP_SECRET }}"
-  #         # environment-url:  "${{ secrets.CSD_ENVIRONMENT_URL }}"
