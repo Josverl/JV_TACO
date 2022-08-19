@@ -1,0 +1,50 @@
+name: Add Publisher
+
+on:
+  workflow_dispatch:
+    inputs:
+
+      environment-url:
+        description: URL to import the Publisher solution into 
+        required: false
+
+      # environment:
+      #   description: 'or existing Environment to  import the Publisher solution into'
+      #   type: environment
+      #   required: false
+
+jobs:
+  add-publisher-url:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: microsoft/powerplatform-actions/pack-solution@v0
+        with:
+          solution-file: packed-solutions/taco_publisher.zip
+          solution-folder: publisher
+          solution-type: Unmanaged
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: packed-solutions
+          path: packed-solutions
+
+  deploy:
+    runs-on: ubuntu-latest
+    if:  ${{ inputs.environment-url }} 
+
+    needs:
+      - build
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: packed-solutions
+
+      - uses: microsoft/powerplatform-actions/import-solution@v0
+        with:
+          solution-file: taco_publisher.zip
+          environment-url:  "${{ secrets.CSD_ENVIRONMENT_URL }}"
+          tenant-id: "${{ secrets.APP_TENANT_ID }}"
+          app-id: "${{ secrets.APP_ID }}"
+          client-secret: "${{ secrets.APP_SECRET }}"          
