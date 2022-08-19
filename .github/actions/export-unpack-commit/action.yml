@@ -55,6 +55,11 @@ runs:
         solution-name: ${{ inputs.solution-name }}
         managed: true
 
+    - uses: actions/upload-artifact@v3
+      with:
+        name: solution-packages
+        path: solution/*.zip
+
     - name: Clear existing solution folder
       run: |
         rm -rf solutions/${{ inputs.solution-name }}/src
