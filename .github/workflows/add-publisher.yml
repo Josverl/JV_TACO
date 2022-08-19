@@ -14,7 +14,7 @@ on:
       #   required: false
 
 jobs:
-  add-publisher-url:
+  build-publisher:
     runs-on: ubuntu-latest
 
     steps:
@@ -35,7 +35,7 @@ jobs:
     if:  ${{ inputs.environment-url }} 
 
     needs:
-      - build
+      - build-publisher
     steps:
       - uses: actions/download-artifact@v2
         with:
