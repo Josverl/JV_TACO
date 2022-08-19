@@ -42,13 +42,13 @@ jobs:
   commit:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
-    if:  ${{ inputs.message }} 
+    # if:  ${{ inputs.message }} 
     steps:
       - uses: actions/checkout@v3
         # us GH Personal Access Token to allow other actions to trigger on any changes to the repo
         with:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
-          ref: ${{ inputs.branch }} }}    
+          ref: ${{ inputs.branch }}
 
       - run: echo Export ${{ inputs.solution_name }} from ${{ inputs.environment }}
 
