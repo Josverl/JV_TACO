@@ -58,7 +58,7 @@ runs:
     - uses: actions/upload-artifact@v3
       with:
         name: solution-packages
-        path: solution/*.zip
+        path: solutions/${{ inputs.solution-name }}*.zip
 
     - name: Clear existing solution folder
       run: |
