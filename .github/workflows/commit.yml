@@ -32,7 +32,7 @@ on:
 
 
 jobs:
-  print-tag:
+  commit:
     runs-on: ubuntu-latest
     if:  ${{ inputs.message }} 
     steps:
@@ -43,12 +43,16 @@ jobs:
           echo with message ${{ inputs.message }}
 
       - name: Ping environment ${{ inputs.environment }}
-        run: echo ${{ secrets.CDSENVIRONMENTURL }}
-        
-      - run: echo ${{ secrets.TENANTID }}
-      - run: echo ${{ secrets.CLIENTID }}
-      - run: echo ${{ secrets.CLIENTSECRET }}
-    
+        id: ping
+        uses: microsoft/powerplatform-actions/who-am-i@v0
+        with:
+          environment-url: ${{ secrets.CDSENVIRONMENTURL }}
+          tenant-id: ${{ secrets.TENANTID }}
+          app-id: ${{ secrets.CLIENTID }}
+          client-secret: ${{ secrets.CLIENTSECRET }}
+
+
+      - run: echo ${{ steps.ping.ouputs.environment-id}}
 
       # - name: Extract solution
 
