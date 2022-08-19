@@ -35,6 +35,7 @@ on:
 jobs:
   commit:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     if:  ${{ inputs.message }} 
     steps:
       - name: Print intent
@@ -42,13 +43,13 @@ jobs:
           echo Export ${{ inputs.solution }} from ${{ inputs.environment }}
           echo as a ${{ inputs.solution_type }} solution
           echo with message ${{ inputs.message }}
-          echo tenant-id ${{ secrets.TENANTID }}
+
 
       - name: Ping environment ${{ inputs.environment }}
         id: ping
         uses: microsoft/powerplatform-actions/who-am-i@v0
         with:
-          environment-url:  "${{ secrets.TENANTID }}"
+          environment-url:  "${{ secrets.CDSENVIRONMENTURL }}"
           tenant-id: "${{ secrets.TENANTID }}"
           app-id: "${{ secrets.CLIENTID }}"
           client-secret: "${{ secrets.CLIENTSECRET }}"
