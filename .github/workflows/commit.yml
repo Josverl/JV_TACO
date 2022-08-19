@@ -8,6 +8,12 @@ on:
         default: '.'
         type: string
 
+      branch:
+        description: 'Branch to commit to'
+        default: 'Dev'
+        type: string
+        required: true 
+
       environment:
         description: 'Environment to extract solution from'
         type: environment
@@ -38,10 +44,11 @@ jobs:
     environment: ${{ inputs.environment }}
     if:  ${{ inputs.message }} 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         # us GH Personal Access Token to allow other actions to trigger on any changes to the repo
         with:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
+          ref: ${{ inputs.branch }} }}    
 
       - run: echo Export ${{ inputs.solution_name }} from ${{ inputs.environment }}
 
