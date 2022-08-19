@@ -1,4 +1,4 @@
-name: commit-solution
+name: ping-environment
 on:
   workflow_dispatch:
     inputs:
@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-  commit:
+  ping:
     runs-on: ubuntu-latest
     environment: ${{ inputs.environment }}
     steps:
