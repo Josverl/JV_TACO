@@ -44,7 +44,8 @@ jobs:
       - uses: microsoft/powerplatform-actions/import-solution@v0
         with:
           solution-file: taco_publisher.zip
-          environment-url:  "${{ secrets.CSD_ENVIRONMENT_URL }}"
+          environment-url:  "${{ inputs.environment-url }}"
           tenant-id: "${{ secrets.APP_TENANT_ID }}"
           app-id: "${{ secrets.APP_ID }}"
           client-secret: "${{ secrets.APP_SECRET }}"
+          # environment-url:  "${{ secrets.CSD_ENVIRONMENT_URL }}"
