@@ -50,7 +50,8 @@ jobs:
           token: ${{ secrets.MY_GITHUB_TOKEN }}
           ref: ${{ inputs.branch }}
 
-      - run: echo Export ${{ inputs.solution_name }} from ${{ inputs.environment }}
+      - run: 
+          URL="${{ secrets.CSD_ENVIRONMENT_URL }}"; echo Export ${{ inputs.solution_name }} from ${{ inputs.environment }} $URL
 
       - name: Ping environment ${{ inputs.environment }}
         id: ping
