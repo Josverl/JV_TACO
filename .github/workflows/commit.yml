@@ -1,0 +1,36 @@
+name: commit-solution
+on:
+  workflow_dispatch:
+    inputs:
+      solution:
+        description: 'solution to extract and commit'
+        required: true
+        default: 'TeamsAACQOrchestrator' 
+        type: choice
+        options:
+        - TeamsAACQOrchestrator
+        - taco_publisher
+      solution_type:
+        description: 'Export Both or only Unmanaged'
+        required: true 
+        default: 'Both' 
+        type: choice
+        options:
+        - Both
+        - Unmanaged
+      tags:
+        description: 'Test scenario tags'
+        required: true 
+        type: string
+      environment:
+        description: 'Environment to run tests against'
+        type: environment
+        required: true 
+
+jobs:
+  print-tag:
+    runs-on: ubuntu-latest
+    if:  ${{ inputs.print_tags }} 
+    steps:
+      - name: Print the input tag to STDOUT
+        run: echo  The tags are ${{ inputs.tags }} 
