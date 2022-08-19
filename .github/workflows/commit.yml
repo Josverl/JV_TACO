@@ -72,3 +72,4 @@ jobs:
           tenant-id: "${{ secrets.APP_TENANT_ID }}"
           app-id: "${{ secrets.APP_ID }}"
           client-secret: "${{ secrets.APP_SECRET }}"
+          solution-type: ${{ inputs.solution_type }}
