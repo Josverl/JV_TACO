@@ -25,7 +25,7 @@ inputs:
     description: "Name of solution to export"
     required: true
 
-  solution_type:
+  solution-type:
     description: 'Export Both or only Unmanaged'
     required: true 
     default: 'Both' 
@@ -70,7 +70,7 @@ runs:
       with:
         solution-file: solutions/${{ inputs.solution-name }}.zip
         solution-folder: solutions/${{ inputs.solution-name }}/src
-        solution-type: ${{ inputs.solution_type}}
+        solution-type: ${{ inputs.solution-type}}
 
     - name: Commit the changes
       uses: EndBug/add-and-commit@v8

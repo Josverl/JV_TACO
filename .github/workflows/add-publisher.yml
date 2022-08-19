@@ -1,4 +1,4 @@
-name: Add Publisher
+name: Add Publisher to environment
 
 on:
   workflow_dispatch:
