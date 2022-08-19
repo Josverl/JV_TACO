@@ -1,2 +1,4 @@
 # Do not check in the solution zip files, only the source code
 solutions/**/*.zip
+
+build

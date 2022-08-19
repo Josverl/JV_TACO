@@ -21,14 +21,14 @@ jobs:
       - uses: actions/checkout@v3
       - uses: microsoft/powerplatform-actions/pack-solution@v0
         with:
-          solution-file: packed-solutions/taco_publisher.zip
-          solution-folder: publisher
+          solution-file: build/packed/taco_publisher.zip
+          solution-folder: solutions/taco_publisher
           solution-type: Unmanaged
 
       - uses: actions/upload-artifact@v2
         with:
           name: packed-solutions
-          path: packed-solutions
+          path: build/packed
 
   deploy:
     runs-on: ubuntu-latest
@@ -47,4 +47,4 @@ jobs:
           environment-url:  "${{ secrets.CSD_ENVIRONMENT_URL }}"
           tenant-id: "${{ secrets.APP_TENANT_ID }}"
           app-id: "${{ secrets.APP_ID }}"
-          client-secret: "${{ secrets.APP_SECRET }}"          
+          client-secret: "${{ secrets.APP_SECRET }}"
