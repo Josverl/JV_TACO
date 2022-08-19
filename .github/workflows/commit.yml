@@ -48,7 +48,7 @@ jobs:
         id: ping
         uses: microsoft/powerplatform-actions/who-am-i@v0
         with:
-          environment-url:  "https://org71ae2309.crm4.dynamics.com"
+          environment-url:  "${{ secrets.TENANTID }}"
           tenant-id: "${{ secrets.TENANTID }}"
           app-id: "${{ secrets.CLIENTID }}"
           client-secret: "${{ secrets.CLIENTSECRET }}"
