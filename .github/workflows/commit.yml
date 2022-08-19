@@ -56,10 +56,10 @@ jobs:
         id: ping
         uses: microsoft/powerplatform-actions/who-am-i@v0
         with:
-          environment-url:  "${{ secrets.CDSENVIRONMENTURL }}"
-          tenant-id: "${{ secrets.TENANTID }}"
-          app-id: "${{ secrets.CLIENTID }}"
-          client-secret: "${{ secrets.CLIENTSECRET }}"
+          environment-url:  "${{ secrets.CSD_ENVIRONMENT_URL }}"
+          tenant-id: "${{ secrets.APP_TENANT_ID }}"
+          app-id: "${{ secrets.APP_ID }}"
+          client-secret: "${{ secrets.APP_SECRET }}"
 
       - run: echo Connected to Environment ID ${{ steps.ping.outputs.environment-id}}
 
@@ -67,7 +67,7 @@ jobs:
         with:
           solution-name: ${{ inputs.solution_name }}
           message: ${{ inputs.message }}
-          environment-url:  "${{ secrets.CDSENVIRONMENTURL }}"
-          tenant-id: "${{ secrets.TENANTID }}"
-          app-id: "${{ secrets.CLIENTID }}"
-          client-secret: "${{ secrets.CLIENTSECRET }}"
+          environment-url:  "${{ secrets.CSD_ENVIRONMENT_URL }}"
+          tenant-id: "${{ secrets.APP_TENANT_ID }}"
+          app-id: "${{ secrets.APP_ID }}"
+          client-secret: "${{ secrets.APP_SECRET }}"
