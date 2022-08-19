@@ -2,6 +2,16 @@ name: commit-solution
 on:
   workflow_dispatch:
     inputs:
+      message:
+        description: 'Commit message'
+        required: true 
+        type: string
+
+      environment:
+        description: 'Environment to extract solution from'
+        type: environment
+        required: true 
+
       solution:
         description: 'solution to extract and commit'
         required: true
@@ -10,6 +20,7 @@ on:
         options:
         - TeamsAACQOrchestrator
         - taco_publisher
+
       solution_type:
         description: 'Export Both or only Unmanaged'
         required: true 
@@ -18,19 +29,29 @@ on:
         options:
         - Both
         - Unmanaged
-      tags:
-        description: 'Test scenario tags'
-        required: true 
-        type: string
-      environment:
-        description: 'Environment to run tests against'
-        type: environment
-        required: true 
+
 
 jobs:
   print-tag:
     runs-on: ubuntu-latest
-    if:  ${{ inputs.print_tags }} 
+    if:  ${{ inputs.message }} 
     steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ inputs.tags }} 
+      - name: Print intent
+        run: 
+          echo Export ${{ inputs.solution }} from ${{ inputs.environment }}
+          echo as a ${{ inputs.solution_type }} solution
+          echo with message ${{ inputs.message }}
+
+      - name: Ping environment ${{ inputs.environment }}
+        run: echo ${{ secrets.CDSENVIRONMENTURL }}
+        
+      - run: echo ${{ secrets.TENANTID }}
+      - run: echo ${{ secrets.CLIENTID }}
+      - run: echo ${{ secrets.CLIENTSECRET }}
+    
+
+      # - name: Extract solution
+
+      # - name: Commit solution
+      # - name: Push solution
+      
