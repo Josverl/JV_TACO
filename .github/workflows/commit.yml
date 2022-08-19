@@ -13,7 +13,7 @@ on:
         type: environment
         required: true 
 
-      solution:
+      solution_name:
         description: 'solution to extract and commit'
         required: true
         default: 'TeamsAACQOrchestrator' 
@@ -38,12 +38,12 @@ jobs:
     environment: ${{ inputs.environment }}
     if:  ${{ inputs.message }} 
     steps:
-      - name: Print intent
-        run: 
-          echo Export ${{ inputs.solution }} from ${{ inputs.environment }}
-          echo as a ${{ inputs.solution_type }} solution
-          echo with message ${{ inputs.message }}
+      - uses: actions/checkout@v2
+        # us GH Personal Access Token to allow other actions to trigger on any changes to the repo
+        with:
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
 
+      - run: echo Export ${{ inputs.solution_name }} from ${{ inputs.environment }}
 
       - name: Ping environment ${{ inputs.environment }}
         id: ping
@@ -54,11 +54,13 @@ jobs:
           app-id: "${{ secrets.CLIENTID }}"
           client-secret: "${{ secrets.CLIENTSECRET }}"
 
+      - run: echo Connected to Environment ID ${{ steps.ping.outputs.environment-id}}
 
-      - run: echo ${{ steps.ping.ouputs.environment-id}}
-
-      # - name: Extract solution
-
-      # - name: Commit solution
-      # - name: Push solution
-      
+      - uses: ./.github/actions/export-unpack-commit
+        with:
+          solution-name: ${{ inputs.solution_name }}
+          message: ${{ inputs.message }}
+          environment-url:  "${{ secrets.CDSENVIRONMENTURL }}"
+          tenant-id: "${{ secrets.TENANTID }}"
+          app-id: "${{ secrets.CLIENTID }}"
+          client-secret: "${{ secrets.CLIENTSECRET }}"
