@@ -22,7 +22,7 @@ jobs:
       - uses: microsoft/powerplatform-actions/pack-solution@v0
         with:
           solution-file: build/packed/taco_publisher.zip
-          solution-folder: solutions/taco_publisher
+          solution-folder: solutions/taco_publisher/src
           solution-type: Unmanaged
 
       - uses: actions/upload-artifact@v2
