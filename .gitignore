@@ -1,4 +1,5 @@
 # Do not check in the solution zip files, only the source code
 solutions/**/*.zip
 
-build
+# build folder
+packed-solutions
