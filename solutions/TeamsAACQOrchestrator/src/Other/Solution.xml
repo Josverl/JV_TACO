@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ImportExportXml version="9.2.22073.182" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ImportExportXml version="9.2.22054.150" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SolutionManifest>
     <UniqueName>TeamsAACQOrchestrator</UniqueName>
     <LocalizedNames>
@@ -7,14 +7,14 @@
     </LocalizedNames>
     <Descriptions />
     <Version>1.0.0.0</Version>
-    <Managed>2</Managed>
+    <Managed>0</Managed>
     <Publisher>
       <UniqueName>DefaultPublisherorg7e50383f</UniqueName>
       <LocalizedNames>
-        <LocalizedName description="taco_publisher" languagecode="1033" />
+        <LocalizedName description="Default Publisher for org7e50383f" languagecode="1033" />
       </LocalizedNames>
       <Descriptions>
-        <Description description="TACO app publisher" languagecode="1033" />
+        <Description description="Default publisher for this organization" languagecode="1033" />
       </Descriptions>
       <EMailAddress xsi:nil="true"></EMailAddress>
       <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>

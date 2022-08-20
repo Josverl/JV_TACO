@@ -1,0 +1,109 @@
+header_bar As CanvasComponent:
+    Fill: =RGBA(72, 70, 68, 1)
+    Height: =100
+    Width: =App.Width
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    lbl_title As label:
+        Color: =RGBA(255, 255, 255, 1)
+        FontWeight: =FontWeight.Bold
+        Height: =36
+        Size: =15
+        Text: ="Teams AA/CQ Orchestrator (TACO)"
+        Width: =355
+        X: =Parent.X + 5
+        Y: =(Parent.Height - lbl_title.Height) / 2
+        ZIndex: =3
+
+    lbl_username As text:
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =0
+        Color: =RGBA(255, 255, 255, 1)
+        Default: =Concatenate("Welcome, ", Office365Users.MyProfileV2().displayName)
+        Fill: =RGBA(0, 0, 0, 0)
+        Height: =38
+        Width: =352
+        X: =header_bar.Width - lbl_username.Width - 10
+        Y: =(Parent.Height - lbl_username.Height)/2
+        ZIndex: =4
+
+    img_user As image:
+        Height: =70
+        Image: =If(Office365Users.UserPhotoMetadata(User().Email).HasPhoto,Office365Users.UserPhotoV2(User().Email))
+        RadiusBottomLeft: =90
+        RadiusBottomRight: =90
+        RadiusTopLeft: =90
+        RadiusTopRight: =90
+        Width: =70
+        X: =lbl_username.X - img_user.Width - 10
+        Y: =(Parent.Height - img_user.Height)/2
+        ZIndex: =5
+
+    Button2 As button:
+        Color: =White
+        DisplayMode: =DisplayMode.View
+        Fill: |-
+            =With(
+                {
+                    varChar: ForAll(
+                        Sequence(26),
+                        {
+                            Letter: Char(64+Value),
+                            Number: Value
+                        }
+                    ),
+                    varColors: Table(
+                        {Color: "#d13438", ID: 1}, // Red 10
+                        {Color: "#ca5010", ID: 2}, // Orange 20
+                        {Color: "#fce100", ID: 3}, // Yellow 10
+                        {Color: "#0b6a0b", ID: 4}, // Green 20
+                        {Color: "#00ad56", ID: 5}, // Green Cyan 10
+                        {Color: "#00b7c3", ID: 6}, // Cyan 10
+                        {Color: "#0078d4", ID: 7}, // Cyan Blue 20
+                        {Color: "#5c2e91", ID: 8}, // Blue Magenta 30
+                        {Color: "#881798", ID: 10}, // Magenta 20
+                        {Color: "#e3008c", ID: 11}, // Magenta Pink 10
+                        {Color: "#69797e", ID: 12}  // Gray 20
+                    )
+                },
+                LookUp(
+                    varColors,
+                    ID=Mod(
+                        Sum(
+                            AddColumns(
+                                    Split(
+                                        Substitute(
+                                            Upper(Office365Users.MyProfileV2().displayName),
+                                            " ",
+                                            ""
+                                        ),
+                                        ""
+                                    ),
+                                "SumValue",
+                                LookUp(
+                                    varChar,
+                                    Letter=Result,
+                                    Number
+                                )
+                            ),
+                            SumValue
+                        ),
+                        12
+                    ) + 1,
+                    ColorValue(Color)
+                )
+            )
+        Height: =70
+        RadiusBottomLeft: =90
+        RadiusBottomRight: =90
+        RadiusTopLeft: =90
+        RadiusTopRight: =90
+        Text: =Concatenate(Left(Office365Users.MyProfileV2().givenName,1),Left(Office365Users.MyProfileV2().surname,1))
+        Visible: =If(IsBlank(img_user),true,false)
+        Width: =70
+        X: =img_user.X
+        Y: =img_user.Y
+        ZIndex: =6
+

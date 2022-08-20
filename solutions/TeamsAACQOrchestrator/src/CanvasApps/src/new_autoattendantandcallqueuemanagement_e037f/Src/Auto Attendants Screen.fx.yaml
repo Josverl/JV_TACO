@@ -1,0 +1,68 @@
+"'Auto Attendants Screen' As screen":
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: =Set(locCurrentTab, Blank())
+    Width: =Max(App.Width, App.DesignWidth)
+
+    header_bar_3 As header_bar:
+
+    "gal_AutoAttendant As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Items: =Filter('Auto Attendant management', Title in Filter('User administration', UPN.DisplayName = locUserFullName).Title)
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =61
+        Width: =Parent.Width / 1.15
+        X: =left_menu_bar_3.X + left_menu_bar_3.Width + 15
+        Y: =header_bar_3.Y + header_bar_3.Height +80
+        ZIndex: =1
+
+        Title1 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =15
+            Text: =ThisItem.Title
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        NextArrow1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =40
+            Icon: =Icon.ChevronRight
+            OnSelect: |-
+                =Navigate('Auto Attendant Edit Screen',ScreenTransition.None,{AAName:ThisItem, CurrentTab:"Greeting"})
+            PaddingLeft: =10
+            PaddingRight: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =40
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =2
+
+        Separator1 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =3
+
+    left_menu_bar_3 As left_menu_bar:
+        Default: ="Auto Attendants Screen"
+        Y: =100
+        ZIndex: =2
+
+    lbl_AutoAttendant_name_header As label:
+        FontWeight: =FontWeight.Bold
+        Size: =15
+        Text: ="Auto Attendant name"
+        Width: =317
+        X: =left_menu_bar_3.X + left_menu_bar_3.Width + 40
+        Y: =header_bar_3.Y + header_bar_3.Height + 40
+        ZIndex: =3
+

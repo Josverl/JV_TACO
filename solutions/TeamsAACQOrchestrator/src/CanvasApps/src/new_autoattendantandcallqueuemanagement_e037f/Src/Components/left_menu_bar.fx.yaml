@@ -1,0 +1,62 @@
+left_menu_bar As CanvasComponent:
+    Default: ="Text"
+    Fill: =RGBA(51, 52, 74, 1)
+    Height: =668
+    menuitems: |-
+        =Table(
+            {Value: "Home", Icon: Icon.Home, Screen: 'Home Screen'},
+            {Value: "Auto Attendants", Icon: Icon.Waypoint, Screen: 'Auto Attendants Screen', Screen2: 'Auto Attendant Edit Screen'},
+            {Value: "Call Queues", Icon: Icon.Waypoint, Screen: 'Call Queues Screen', Screen2: 'Call Queue Edit Screen'},
+            {Value: "User Management", Icon: Icon.Waypoint, Screen: 'User Management Screen', Screen2: 'User Management Edit Screen'}    
+         )
+    Width: =150
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    glr_menu_items As gallery.galleryVertical:
+        Height: =463
+        Items: =left_menu_bar.menuitems
+        Layout: =Layout.Vertical
+        OnSelect: =Navigate(ThisItem.Screen)
+        ShowScrollbar: =false
+        TemplateFill: =If(ThisItem.Screen.Name=left_menu_bar.Default,RGBA(98, 100, 167, 1), RGBA(51, 52, 74, 1))
+        TemplatePadding: =0
+        TemplateSize: =50
+        Width: =150
+        Y: =1
+        ZIndex: =4
+
+        btn_menu_item As button:
+            BorderThickness: =0
+            Fill: =If(ThisItem.Screen.Name=left_menu_bar.Default,RGBA(98, 100, 167, 1), RGBA(51, 52, 74, 1))
+            FocusedBorderThickness: =0
+            Height: =50
+            HoverFill: =RGBA(70, 71, 117, 1)
+            OnSelect: =Navigate(ThisItem.Screen,ScreenTransition.None)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =ThisItem.Value
+            Width: =Parent.TemplateWidth
+            ZIndex: =1
+
+        rec_menu_item As rectangle:
+            BorderColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =50
+            Visible: =If(ThisItem.Screen.Name=left_menu_bar.Default,true, false)
+            Width: =5
+            ZIndex: =2
+
+    Label1 As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Text: ="Version 1.0"
+        Y: =623
+        ZIndex: =5
+

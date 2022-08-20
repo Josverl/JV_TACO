@@ -1,0 +1,283 @@
+"'Home Screen' As screen":
+    Fill: =RGBA(243, 242, 241, 1)
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: =Set(locCurrentTab, Blank())
+    Width: =Max(App.Width, App.DesignWidth)
+
+    "gal_CallQueues As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Fill: |
+            =White
+        Height: =250
+        Items: =Filter('Call Queue management', Title in Filter('User administration', UPN.DisplayName = locUserFullName).Title)
+        Layout: =Layout.Vertical
+        TemplateFill: =White
+        TemplatePadding: =0
+        TemplateSize: =50
+        Width: =538
+        X: |
+            =rec_cq_header.X
+        Y: =rec_cq_header.Y + rec_cq_header.Height
+        ZIndex: =1
+
+        lbl_cq_overview_title As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =15
+            Text: =ThisItem.Title
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        ico_cq_overview_arrow As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =40
+            Icon: =Icon.ChevronRight
+            OnSelect: |-
+                =Navigate('Call Queue Edit Screen',ScreenTransition.None,{CQName:ThisItem,CurrentTab:"Greeting and music"})
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =40
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =2
+
+        sep_cq_overview As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =3
+
+    "gal_AutoAttendants As gallery.'BrowseLayout_Vertical_OneTextVariant_ver4.0'":
+        Fill: =White
+        Height: =250
+        Items: =Filter('Auto Attendant management', Title in Filter('User administration', UPN.DisplayName = locUserFullName).Title)
+        Layout: =Layout.Vertical
+        TemplateFill: =White
+        TemplatePadding: =0
+        TemplateSize: =50
+        Width: =513
+        X: =rec_aa_header.X
+        Y: =rec_aa_header.Y + rec_aa_header.Height
+        ZIndex: =2
+
+        lbl_aa_overview_title As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =15
+            Text: =ThisItem.Title
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - 104
+            X: =32
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        ico_aa_overview_arrow As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =40
+            Icon: =Icon.ChevronRight
+            OnSelect: |-
+                =Navigate('Auto Attendant Edit Screen',ScreenTransition.None,{AAName:ThisItem, CurrentTab:"Greeting"})
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =40
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =2
+
+        sep_aa_overview As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =3
+
+    header_bar_2 As header_bar:
+        ZIndex: =3
+
+    left_menu_bar_2 As left_menu_bar:
+        Default: ="Home Screen"
+        Y: =100
+        ZIndex: =4
+
+    rec_aa_header As rectangle:
+        Fill: =White
+        Width: =187
+        X: =182
+        Y: =131
+        ZIndex: =5
+
+    rec_cq_header As rectangle:
+        Fill: =White
+        Width: =187
+        X: =729
+        Y: =rec_aa_header.Y
+        ZIndex: =6
+
+    lbl_aa_overview_header As label:
+        FontWeight: =FontWeight.Bold
+        Height: =38
+        Size: =16
+        Text: ="Auto attendants"
+        Width: =187
+        X: =rec_aa_header.X + (rec_aa_header.Width - lbl_aa_overview_header.Width)/2
+        Y: =rec_aa_header.Y + rec_aa_header.Height - lbl_aa_overview_header.Height
+        ZIndex: =7
+
+    lbl_cq_overview_header As label:
+        Align: =Align.Center
+        FontWeight: =FontWeight.Bold
+        Height: =38
+        Size: =16
+        Text: ="Call queues"
+        Width: =187
+        X: =rec_cq_header.X + (rec_cq_header.Width - lbl_cq_overview_header.Width)/2
+        Y: =rec_cq_header.Y + rec_cq_header.Height - lbl_cq_overview_header.Height
+        ZIndex: =8
+
+    lbl_aa_count_header As label:
+        Align: =Align.Center
+        FontWeight: =FontWeight.Bold
+        Size: =20
+        Text: =CountRows(gal_AutoAttendants.AllItems)
+        Width: =43
+        X: =rec_aa_header.X + (rec_aa_header.Width - lbl_aa_count_header.Width)/2
+        Y: =rec_aa_header.Y + 10
+        ZIndex: =9
+
+    lbl_cq_count_header As label:
+        Align: =Align.Center
+        FontWeight: =FontWeight.Bold
+        Size: =20
+        Text: =CountRows(gal_CallQueues.AllItems)
+        Width: =43
+        X: =rec_cq_header.X + (rec_cq_header.Width - lbl_cq_count_header.Width)/2
+        Y: =rec_aa_header.Y + 10
+        ZIndex: =10
+
+    tbl_audit As dataTable.datatable:
+        BorderStyle: =BorderStyle.Solid
+        DisplayMode: =DisplayMode.Edit
+        Fill: =White
+        HeadingFill: =RGBA(98, 100, 167, 1)
+        Height: =164
+        Items: |
+            =LastN(
+            SortByColumns(
+                            Filter('Voice management audit log', locUserFullName in 'Created By'.DisplayName),
+                            "Timestamp",Descending
+            ),
+            5)
+        Width: =1085
+        X: =182
+        Y: =rec_audit_header.Y + rec_audit_header.Height + 10
+        ZIndex: =11
+
+        tbl_audit_title As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Action"
+            FieldName: ="Title"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =1
+            Text: =ThisItem.Title
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =4
+
+        tbl_audit_timestamp As dataTableColumn.dateTimeColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Timestamp"
+            FieldName: ="Timestamp"
+            FieldVariantName: ="dateTimeColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =2
+            Text: =Text(ThisItem.Timestamp,DateTimeFormat.ShortDateTime)
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =5
+
+        tbl_audit_result As dataTableColumn.textualColumn:
+            AutoWidth: =false
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Result"
+            FieldName: ="Result"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =6
+            Text: =ThisItem.Result
+            Width: =95
+            X: =979
+            Y: =0
+            ZIndex: =7
+
+        tbl_audit_message As dataTableColumn.textualColumn:
+            AutoWidth: =false
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Details"
+            FieldName: ="Message"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =5
+            Text: =ThisItem.Message
+            Width: =366
+            X: =0
+            Y: =0
+            ZIndex: =8
+
+        tbl_audit_affectedobject As dataTableColumn.textualColumn:
+            DisplayMode: =DisplayMode.Edit
+            FieldDisplayName: ="Object"
+            FieldName: ="AffectedObject"
+            FieldVariantName: ="textualColumn"
+            Height: =Parent.Height
+            LayoutHeight: =Parent.Height
+            Order: =4
+            Text: =ThisItem.'Affected Object'
+            Width: =100
+            X: =0
+            Y: =0
+            ZIndex: =9
+
+    rec_audit_header As rectangle:
+        Fill: =White
+        Height: =44
+        Width: =tbl_audit.Width
+        X: =182
+        Y: =gal_AutoAttendants.Y + gal_AutoAttendants.Height + 25
+        ZIndex: =12
+
+    lbl_audit_overview As label:
+        FontWeight: =FontWeight.Bold
+        Height: =38
+        Size: =16
+        Text: ="Recent activities"
+        Width: =187
+        X: =gal_AutoAttendants.X
+        Y: =gal_AutoAttendants.Y + gal_AutoAttendants.Height + 25
+        ZIndex: =13
+

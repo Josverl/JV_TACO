@@ -1,0 +1,116 @@
+"'Call Queues Screen' As screen":
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: =Set(locCurrentTab, Blank())
+    Width: =Max(App.Width, App.DesignWidth)
+
+    header_bar_1 As header_bar:
+
+    "gal_Call_Queues As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+        Items: =Filter('Call Queue management', Title in Filter('User administration', UPN.DisplayName = locUserFullName).Title)
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =61
+        Width: =Parent.Width / 1.15
+        X: =left_menu_bar_2.X + left_menu_bar_2.Width + 15
+        Y: =header_bar_3.Y + header_bar_3.Height + 80
+        ZIndex: =1
+
+        Title5 As label:
+            Height: =36
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =15
+            Text: =ThisItem.Title
+            VerticalAlign: =VerticalAlign.Top
+            Width: =558
+            X: =32
+            Y: =16
+            ZIndex: =1
+
+        Subtitle4 As label:
+            Height: =36
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =15
+            Text: =ThisItem.Calloverflowthreshold
+            VerticalAlign: =VerticalAlign.Top
+            Width: =83
+            X: =603
+            Y: =16
+            ZIndex: =2
+
+        Body2 As label:
+            Height: =36
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =15
+            Text: =ThisItem.CalltimeoutMaximumwaittime
+            VerticalAlign: =VerticalAlign.Top
+            Width: =89
+            X: =806
+            Y: =16
+            ZIndex: =3
+
+        NextArrow5 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =40
+            Icon: =Icon.ChevronRight
+            OnSelect: |-
+                =Navigate('Call Queue Edit Screen',ScreenTransition.None,{CQName:ThisItem, CurrentTab:"Greeting and music"})
+            PaddingLeft: =10
+            PaddingRight: =10
+            TabIndex: =0
+            Tooltip: ="View item details"
+            Width: =40
+            X: =1137
+            Y: =12
+            ZIndex: =4
+
+        Separator6 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+
+    left_menu_bar_1 As left_menu_bar:
+        Default: ="Call Queues Screen"
+        Y: =100
+        ZIndex: =2
+
+    lbl_Title_CallQueueName As label:
+        FontWeight: =FontWeight.Bold
+        Size: =15
+        Text: ="Call Queue name"
+        Width: =317
+        X: =left_menu_bar_2.X + left_menu_bar_2.Width + 40
+        Y: =header_bar_2.Y + header_bar_2.Height + 40
+        ZIndex: =3
+
+    lbl_Title_MaximumCalls As label:
+        FontWeight: =FontWeight.Bold
+        Size: =15
+        Text: ="Maximum calls"
+        Width: =184
+        X: =759
+        Y: =header_bar_2.Y + header_bar_2.Height + 40
+        ZIndex: =4
+
+    lbl_Title_MaximumWaitTime As label:
+        FontWeight: =FontWeight.Bold
+        Size: =15
+        Text: ="Maximum wait time"
+        Width: =218
+        X: =960
+        Y: =header_bar_2.Y + header_bar_2.Height + 40
+        ZIndex: =5
+
