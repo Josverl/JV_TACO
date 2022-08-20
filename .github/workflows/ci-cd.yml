@@ -28,7 +28,7 @@ jobs:
 
   deploy:
     environment: test-jos1
-    if: ${{ github.ref_name == 'Dev' }}  # if the branch is 'Dev', was main
+    if: ${{ startsWith(github.ref_name , 'Dev' ) || startsWith(github.ref_name , 'alm' ) || github.ref_name == 'main'}}  # if the branch is 'Dev', was main
     needs:
       - build
     runs-on: ubuntu-latest
