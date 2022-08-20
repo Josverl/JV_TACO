@@ -31,7 +31,7 @@ jobs:
           environment-url:  "${{ inputs.environment-url }}"
           tenant-id: "${{ secrets.APP_TENANT_ID }}"
           app-id: "${{ secrets.APP_ID }}"
-          client-secret: "${{ secrets.APP_SECRET }}"          
+          client-secret: "${{ secrets.APP_SECRET }}"
 
       - uses: actions/upload-artifact@v2
         with:

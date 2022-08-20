@@ -1,0 +1,47 @@
+name: CI / CD
+
+on:
+  push:
+    paths:
+      - solutions/**
+  workflow_dispatch:
+
+concurrency:
+  group: production
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: pack TeamsAACQOrchestrator
+        uses: ./.github/actions/pack-solution
+        with:
+          name: TeamsAACQOrchestrator
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: packed-solutions
+          path: packed-solutions
+
+  deploy:
+    environment: test-jos1
+    if: ${{ github.ref_name == 'Dev' }}  # if the branch is 'Dev', was main
+    needs:
+      - build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: packed-solutions
+
+      - name: Import TACO (TeamsAACQOrchestrator)
+        uses: microsoft/powerplatform-actions/import-solution@v0
+        with:
+          solution-file: TeamsAACQOrchestrator_managed.zip
+          environment-url:  "${{ secrets.CSD_ENVIRONMENT_URL }}"
+          tenant-id: "${{ secrets.APP_TENANT_ID }}"
+          app-id: "${{ secrets.APP_ID }}"
+          client-secret: "${{ secrets.APP_SECRET }}"
